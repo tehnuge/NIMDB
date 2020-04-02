@@ -17,9 +17,9 @@ const Home = (): JSX.Element => {
     <Fragment>
       <div className="container">
         <h1>Reviews</h1>
-        {reviews.map(({ title, content }) => (
+        {reviews.map(({ id, score, title, content }) => (
           <ReviewTile
-            {...{ title, content }}
+            {...{ id, score, title, content }}
           />
         ))}
       </div>

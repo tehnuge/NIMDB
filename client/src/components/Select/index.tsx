@@ -1,9 +1,11 @@
 import { Field, ErrorMessage } from 'formik'
 import React from 'react'
+
 export interface Option {
   label: string
   value: string
 }
+
 export interface SelectProps {
   className?: string
   disabled?: boolean
@@ -12,14 +14,17 @@ export interface SelectProps {
   name: string
   options: Option[]
 }
+
 const Select = (props: SelectProps): JSX.Element => {
-  const { 
+
+  const {
     disabled = false,
     footnote,
     label,
     name,
     options
   } = props
+
   return (
     <div className="form-group">
       {label && <label htmlFor={name}>{label}</label>}
@@ -34,7 +39,7 @@ const Select = (props: SelectProps): JSX.Element => {
         ))}
       </Field>
       <small className="form-text text-muted">{footnote}</small>
-      <ErrorMessage 
+      <ErrorMessage
         name={name}
         className="invalid-feedback"
         component="div"
@@ -42,4 +47,5 @@ const Select = (props: SelectProps): JSX.Element => {
     </div>
   )
 }
+
 export default Select
