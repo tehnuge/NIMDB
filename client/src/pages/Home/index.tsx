@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 
 import ReviewTile from '../../components/ReviewTile'
 import { useReviewsFeedQuery } from '../../graphql'
-import { ReviewTileProps } from '../../components/ReviewTile'
 
 const Home = (): JSX.Element => {
   const { data, error, loading } = useReviewsFeedQuery()
@@ -16,7 +15,7 @@ const Home = (): JSX.Element => {
   return (
     <Fragment>
       <div className="container">
-        <h1>Reviews</h1>
+        <h1>Latest NIMDB Reviews</h1>
         {reviews.map(({ id, score, title, content }) => (
           <ReviewTile
             {...{ id, score, title, content }}
