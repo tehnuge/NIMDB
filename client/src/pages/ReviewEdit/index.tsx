@@ -28,10 +28,10 @@ const ReviewEdit = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
       id: formData.id,
       title: formData.title,
       content: formData.content,
-      score: formData.score,
-      mediaId: formData.media.id,
+      score: formData.score
     }
-    //await updateReviewMutation({ variables })
+
+    await updateReviewMutation({ variables })
     history.push('/')
   }
 
