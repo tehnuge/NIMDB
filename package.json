@@ -19,10 +19,11 @@
     "graphql-tag": "^2.10.3"
   },
   "scripts": {
-    "server": "yarn --cwd server dev",
     "client": "yarn --cwd client start",
-    "dev": "concurrently \"yarn server\" \"yarn client\" \"yarn codegen:watch\"",
     "codegen": "gql-gen --config codegen.yml",
-    "codegen:watch": "gql-gen --config codegen.yml --watch"
+    "codegen:watch": "gql-gen --config codegen.yml --watch",
+    "dev": "concurrently \"yarn server\" \"yarn client\" \"yarn codegen:watch\"",
+    "reseed": "cd server && yarn knex seed:run",
+    "server": "yarn --cwd server dev"
   }
 }

@@ -20,7 +20,9 @@ yarn knex migrate:latest
 yarn knex seed:run
 ```
 
-Start a dev
+Start a dev server in the root directory
+
+`yarn dev`
 
 ## Adding to GraphQL
 
