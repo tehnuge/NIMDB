@@ -1,5 +1,6 @@
 import { Field, ErrorMessage } from 'formik'
 import React from 'react'
+
 interface InputProps {
   disabled?: boolean
   footnote?: string
@@ -8,7 +9,7 @@ interface InputProps {
   type?: string
 }
 const Input = (props: InputProps): JSX.Element => {
-  const { 
+  const {
     disabled = false,
     footnote,
     label,
@@ -25,8 +26,8 @@ const Input = (props: InputProps): JSX.Element => {
         type={type}
       />
       <small className="form-text text-muted">{footnote}</small>
-      <ErrorMessage 
-        name={name} 
+      <ErrorMessage
+        name={name}
         className="invalid-feedback"
         component="div"
       />

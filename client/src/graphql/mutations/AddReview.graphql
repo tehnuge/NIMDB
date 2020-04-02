@@ -1,0 +1,15 @@
+mutation AddReview(
+  $title: String!
+  $content: String
+) {
+  addReview(title: $title, content: $content) {
+    id
+    score
+    title
+    content
+    media {
+      id
+      title
+    }
+  }
+}

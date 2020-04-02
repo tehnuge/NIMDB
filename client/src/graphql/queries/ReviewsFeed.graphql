@@ -1,0 +1,12 @@
+query ReviewsFeed {
+  reviews {
+    id
+    score
+    title
+    content
+    media {
+      id
+      title
+    }
+  }
+}

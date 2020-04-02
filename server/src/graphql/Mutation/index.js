@@ -1,6 +1,5 @@
-const addProject = require('./addProject')
-const addTodo = require('./addTodo')
-const updateTodo = require('./updateTodo')
+const addReview = require('./addReview')
 
-const Mutation = { addProject, addTodo, updateTodo }
+const Mutation = { addReview }
+
 module.exports = Mutation
