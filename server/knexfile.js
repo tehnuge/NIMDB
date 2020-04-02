@@ -4,9 +4,9 @@ module.exports = {
   connection: process.env.DATABASE_URL || {
     host: '127.0.0.1',
     port: '54320',
-    user: 'stack',
+    user: 'nimdb',
     password: 'password',
-    database: 'stack',
+    database: 'nimdb',
   },
   migrations: {
     directory: path.join(__dirname, 'src', 'db', 'migrations')

@@ -1,28 +1,33 @@
 const uuid = require('uuid')
 
 async function clear(knex) {
-  await knex('todo').del()
+  await knex('media').del();
+  await knex('review').del();
 }
 
 async function seed(knex) {
   await clear(knex)
-  const projectId = uuid.v4()
-  await knex('project').insert({
-    id: projectId,
-    title: 'Project',
+  const mediaId = uuid.v4()
+  await knex('media').insert({
+    id: mediaId,
+    title: 'Titanic',
+    media_type: 'movie',
+    url: 'www.example.com'
   })
 
-  await knex('todo').insert({
-    projectId,
+  await knex('media').insert({
     id: uuid.v4(),
-    title: 'Test action one',
-    complete: false,
-  })
-  await knex('todo').insert({
-    projectId,
+    title: 'Inception',
+    media_type: 'movie',
+    url: 'www.example2.com'
+  });
+
+  await knex('review').insert({
+    mediaId: mediaId,
     id: uuid.v4(),
     title: 'Test action two',
-    complete: false,
+    score: 5,
+    content: 'this movie was goodly'
   })
 }
 module.exports = { clear, seed }
