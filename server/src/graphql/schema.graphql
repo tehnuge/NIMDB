@@ -15,7 +15,10 @@ type Review {
 type Query {
   medias: [Media]
   media(id: ID!): Media
-  
+
   reviews: [Review]
   review(id: ID!): Review
+}
+type Mutation {
+  addReview(title: String!, content: String): Review!
 }
