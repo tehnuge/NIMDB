@@ -1,28 +1,21 @@
-type Project {
+type Media {
   id: ID!
   title: String!
-  todos: [Todo]
+  media_type: String!
+  url: String
+  reviews: [Review]
 }
-type Todo {
+type Review {
   id: ID!
   title: String!
-  complete: Boolean!
-  project: Project
+  score: Int!
+  content: String
+  media: Media
 }
 type Query {
-  projects: [Project]
-  project(id: ID!): Project
+  medias: [Media]
+  media(id: ID!): Media
   
-  todos: [Todo]
-  todo(id: ID!): Todo
+  reviews: [Review]
+  review(id: ID!): Review
 }
-type Mutation {
-  addProject(title: String!): Project!
-  updateProject(id: ID!, title: String!): Project
-  addTodo(title: String!): Todo!
-  updateTodo(
-    id: ID!
-    title: String!
-    projectId: String
-    complete: Boolean!
-  ): Todo!}

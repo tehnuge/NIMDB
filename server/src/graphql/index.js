@@ -1,11 +1,9 @@
-const Mutation = require('./Mutation')
 const Query = require('./Query')
-const Project = require('./resolvers/Project')
-const Todo = require('./resolvers/Todo')
+const Media = require('./resolvers/Media')
+const Review = require('./resolvers/Review')
 const resolvers = {
-  Mutation,
-  Project,
+  Media,
   Query,
-  Todo,
+  Review,
 }
 module.exports = { resolvers }

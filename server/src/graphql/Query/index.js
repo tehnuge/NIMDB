@@ -1,11 +1,13 @@
-const todo = require('./todo')
-const todos = require('./todos')
-const project = require('./project')
-const projects = require('./projects')
+const media = require('./media');
+const medias = require('./medias');
+const review = require('./review');
+const reviews = require('./reviews');
+
 const Query = {
-  todo,
-  todos,
-  project,
-  projects
+  media,
+  medias,
+  review,
+  reviews
 }
+
 module.exports = Query
