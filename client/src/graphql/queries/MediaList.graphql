@@ -1,0 +1,14 @@
+query MediaList {
+    medias {
+        id
+        title
+        media_type
+        reviews {
+            id
+            title
+            content
+        }        
+
+    }
+
+}

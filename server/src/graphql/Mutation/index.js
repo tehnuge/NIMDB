@@ -1,5 +1,6 @@
-const addReview = require('./addReview')
+const addReview = require('./addReview');
+const updateReview = require('./updateReview');
 
-const Mutation = { addReview }
+const Mutation = { addReview, updateReview }
 
-module.exports = Mutation
+module.exports = Mutation;

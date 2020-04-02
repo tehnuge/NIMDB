@@ -2,7 +2,7 @@ import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 
 import ReviewForm from '../../forms/Review'
-import { useReviewQuery, Review } from '../../graphql'
+import { useReviewQuery, Review, useUpdateReviewMutation } from '../../graphql'
 
 interface ReviewParams {
   id: string
@@ -15,7 +15,7 @@ const ReviewEdit = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
       params: { id },
     },
   } = props;
-  //const updateReviewMutation = useUpdateReviewMutation()
+  const [updateReviewMutation] = useUpdateReviewMutation();
   const { data, error, loading } = useReviewQuery({ variables: { id }});
 
   if (loading) return <p>Loading...</p>

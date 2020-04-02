@@ -1,0 +1,24 @@
+mutation UpdateReview(
+  $id: ID!
+  $title: String!
+  $content: String
+  $score: Int
+  $mediaId: String
+) {
+  updateReview($id: ID!, $title: String!, $content: String, $score: Int, $mediaId: String) {
+    id
+    title
+    content
+    score
+    media {
+      id
+      title
+    }
+  }
+}
+
+updateReview(id: [ID], title: 'New Title') {
+  id
+  title
+  content
+}

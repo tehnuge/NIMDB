@@ -8,7 +8,7 @@ type Media {
 type Review {
   id: ID!
   title: String!
-  score: Int!
+  score: Int
   content: String
   media: Media
 }
@@ -20,5 +20,6 @@ type Query {
   review(id: ID!): Review
 }
 type Mutation {
-  addReview(title: String!, content: String): Review!
+  addReview(title: String!, content: String, score: Int): Review!
+  updateReview(id: ID!, title: String, content: String, score: Int): Review!
 }
