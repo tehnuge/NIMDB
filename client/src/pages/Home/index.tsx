@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react'
-
-import ReviewTile from '../../components/ReviewTile'
-import { useReviewsFeedQuery } from '../../graphql'
+import React, { Fragment } from 'react';
+import {Link} from 'react-router-dom';
+import ReviewTile from '../../components/ReviewTile';
+import { useReviewsFeedQuery } from '../../graphql';
 
 const Home = (): JSX.Element => {
   const { data, error, loading } = useReviewsFeedQuery()
@@ -22,6 +22,9 @@ const Home = (): JSX.Element => {
             {...{ id, score, title, content }}
           />
         ))}
+              <Link to={`/edit/new`}>
+                Add Review
+              </Link>
       </div>
     </Fragment>
 )}
