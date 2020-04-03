@@ -19,10 +19,13 @@ const Home = (): JSX.Element => {
         <Link to={`/edit/new`}>
           Add Review
         </Link>
-        {reviews.map(({ id, score, title, content }) => (
+        {reviews.map((review) => (
           <ReviewTile
-            key={id}
-            {...{ id, score, title, content }}
+            key={review.id}
+            id={review.id}
+            title={review.title}
+            content={review.content}
+            mediaTitle={review.media.title}
           />
         ))}
       </div>
