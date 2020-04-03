@@ -16,15 +16,15 @@ const Home = (): JSX.Element => {
     <Fragment>
       <div className="container">
         <h1>Latest NIMDB Reviews</h1>
+        <Link to={`/edit/new`}>
+          Add Review
+        </Link>
         {reviews.map(({ id, score, title, content }) => (
           <ReviewTile
             key={id}
             {...{ id, score, title, content }}
           />
         ))}
-              <Link to={`/edit/new`}>
-                Add Review
-              </Link>
       </div>
     </Fragment>
 )}

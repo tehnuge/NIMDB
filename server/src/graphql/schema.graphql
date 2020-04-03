@@ -23,6 +23,8 @@ type Query {
 }
 
 type Mutation {
-  addReview(title: String!, content: String, score: Int): Review!
+  addReview(title: String!, content: String, score: Int, mediaId: ID): Review!
   updateReview(id: ID!, title: String, content: String, score: Int): Review!
+
+  addMedia(title: String!, media_type: String!, url: String): Media!
 }
