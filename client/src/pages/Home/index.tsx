@@ -18,6 +18,7 @@ const Home = (): JSX.Element => {
         <h1>Latest NIMDB Reviews</h1>
         {reviews.map(({ id, score, title, content }) => (
           <ReviewTile
+            key={id}
             {...{ id, score, title, content }}
           />
         ))}

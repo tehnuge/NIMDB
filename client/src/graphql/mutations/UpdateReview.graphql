@@ -3,9 +3,8 @@ mutation UpdateReview(
   $title: String!
   $content: String
   $score: Int
-  $mediaId: String
 ) {
-  updateReview($id: ID!, $title: String!, $content: String, $score: Int, $mediaId: String) {
+  updateReview(id: $id, title: $title, content: $content, score: $score) {
     id
     title
     content
@@ -15,10 +14,4 @@ mutation UpdateReview(
       title
     }
   }
-}
-
-updateReview(id: [ID], title: 'New Title') {
-  id
-  title
-  content
 }
