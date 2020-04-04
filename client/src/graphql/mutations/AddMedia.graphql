@@ -1,0 +1,12 @@
+mutation AddMedia (
+  $title: String!
+  $media_type: String!
+  $url: String
+){
+  addMedia(title: $title, media_type: $media_type, url: $url) {
+    id
+    title
+    media_type
+    url
+  }
+}

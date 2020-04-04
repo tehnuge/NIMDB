@@ -24,18 +24,43 @@ const mediaTypeToOption = (mediaType: string): Option => ({
 
 const ReviewForm = (props: ReviewFormProps): JSX.Element => {
   const { review, onCancel, onSubmit } = props;
+  const { media } = review;
+
+  const mediaDetails = () => {
+    if (!media) {
+      return (
+        <div className='bg-light p-3 mb-3'>
+          <Input type="text" name="media[title]" label="Title" />
+          <Input type="text" name="media[url]" label="url" />
+          <Select
+            name="media[media_type]"
+            label="Media Type"
+            options={mediaTypes.map(mediaTypeToOption)}
+          />
+        </div>
+      )
+    } else {
+      return (
+        <div className='bg-light p-3 mb-3'>
+          <p>{`Title: ${media.title}`}</p>
+          <p>{`Media Type: ${media.media_type}`}</p>
+          <p>{`Link: ${media.url}`}</p>
+        </div>
+      )
+    }
+  }
 
   return (
     <Formik initialValues={review} onSubmit={onSubmit}>
       <Form>
+        <h2>Media details</h2>
+        {mediaDetails()}
+
+        <h2>Review</h2>
         <Input type="number" name="score" label="Score" />
         <Input type="text" name="title" label="Title" />
         <Input type="text" name="content" label="Content" />
-        <Select
-          name="mediaType"
-          label="Media Type"
-          options={mediaTypes.map(mediaTypeToOption)}
-        />
+        <Input type="hidden" name="media.id" />
         <hr />
         <button className="btn" type="button" onClick={onCancel}>
           Cancel

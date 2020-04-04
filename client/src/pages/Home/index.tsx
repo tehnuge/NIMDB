@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react'
-
-import ReviewTile from '../../components/ReviewTile'
-import { useReviewsFeedQuery } from '../../graphql'
+import React, { Fragment } from 'react';
+import {Link} from 'react-router-dom';
+import ReviewTile from '../../components/ReviewTile';
+import { useReviewsFeedQuery } from '../../graphql';
 
 const Home = (): JSX.Element => {
   const { data, error, loading } = useReviewsFeedQuery()
@@ -16,10 +16,16 @@ const Home = (): JSX.Element => {
     <Fragment>
       <div className="container">
         <h1>Latest NIMDB Reviews</h1>
-        {reviews.map(({ id, score, title, content }) => (
+        <Link to={`/edit/new`}>
+          Add Review
+        </Link>
+        {reviews.map((review) => (
           <ReviewTile
-            key={id}
-            {...{ id, score, title, content }}
+            key={review.id}
+            id={review.id}
+            title={review.title}
+            content={review.content}
+            mediaTitle={review.media.title}
           />
         ))}
       </div>

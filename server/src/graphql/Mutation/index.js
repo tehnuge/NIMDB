@@ -1,6 +1,12 @@
 const addReview = require('./addReview');
 const updateReview = require('./updateReview');
 
-const Mutation = { addReview, updateReview }
+const addMedia = require('./addMedia');
+
+const Mutation = {
+  addReview,
+  updateReview,
+  addMedia
+}
 
 module.exports = Mutation;

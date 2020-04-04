@@ -1,8 +1,9 @@
 mutation AddReview(
   $title: String!
   $content: String
+  $mediaId: ID
 ) {
-  addReview(title: $title, content: $content) {
+  addReview(title: $title, content: $content, mediaId: $mediaId) {
     id
     score
     title

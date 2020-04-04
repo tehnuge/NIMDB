@@ -37,13 +37,13 @@ async function seed(knex) {
     title: 'This was the bomb',
     content: 'Chris Nolan flexin’ and as good as it gets'
   })
-  await knex('review').insert({
-    mediaId: mediaId2,
-    id: uuid.v4(),
-    score: 4,
-    title: 'This movie was goodly',
-    content: 'But on second viewing, I always skip the first hour. Too much setup if you ask me.'
-  })
+  // await knex('review').insert({
+  //   mediaId: mediaId2,
+  //   id: uuid.v4(),
+  //   score: 4,
+  //   title: 'This movie was goodly',
+  //   content: 'But on second viewing, I always skip the first hour. Too much setup if you ask me.'
+  // })
 }
 
 module.exports = { clear, seed }
