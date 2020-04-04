@@ -6,21 +6,24 @@ export interface ReviewTileProps {
   id: string
   title: string
   content: string
+  mediaId: string
   mediaTitle: string
 }
 
 const ReviewTile = (props: ReviewTileProps): JSX.Element => {
-  const { id, title, content, mediaTitle } = props;
+  const { id, title, content, mediaTitle, mediaId} = props;
 
   return (
     <div className='review-tile container border bg-light py-3 mb-3'>
       <div className='row'>
         <div className='col-1 img-fluid text-center'>
-          <img
-            alt='Content poster or logo'
-            className='img-fluid'
-            src='https://upload.wikimedia.org/wikipedia/en/8/83/Dark_knight_rises_poster.jpg'
-          />
+          <Link to={`medias/${mediaId}`}>
+            <img
+              alt='Content poster or logo'
+              className='img-fluid'
+              src='https://upload.wikimedia.org/wikipedia/en/8/83/Dark_knight_rises_poster.jpg'
+            />
+          </Link>
           <span>{mediaTitle}</span>
         </div>
         <div className='col-11'>

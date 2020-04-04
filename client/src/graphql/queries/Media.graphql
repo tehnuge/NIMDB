@@ -1,0 +1,14 @@
+query Media($id: ID!){
+    media(id: $id){
+      id
+      title
+      media_type
+      url
+      reviews {
+        id
+        title
+        content
+        score
+      }
+    }
+}

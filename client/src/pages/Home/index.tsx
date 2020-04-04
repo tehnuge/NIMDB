@@ -26,6 +26,7 @@ const Home = (): JSX.Element => {
             title={review.title}
             content={review.content}
             mediaTitle={review.media.title}
+            mediaId={review.media.id}
           />
         ))}
       </div>
