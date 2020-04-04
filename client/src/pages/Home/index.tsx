@@ -16,7 +16,7 @@ const Home = (): JSX.Element => {
     <Fragment>
       <div className="container">
         <h1>Latest NIMDB Reviews</h1>
-        <Link to={`/edit/new`}>
+        <Link to={`reviews/new`}>
           Add Review
         </Link>
         {reviews.map((review) => (

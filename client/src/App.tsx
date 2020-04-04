@@ -7,8 +7,8 @@ import ReviewNew from './pages/ReviewNew';
 const App = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route exact path="/edit/new" component={ReviewNew} />
-    <Route exact path="/edit/:id" component={ReviewEdit} />
+    <Route exact path="/reviews/new" component={ReviewNew} />
+    <Route exact path="/reviews/:id/edit" component={ReviewEdit} />
   </Switch>
 )
 

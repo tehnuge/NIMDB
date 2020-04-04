@@ -36,7 +36,7 @@ const ReviewTile = (props: ReviewTileProps): JSX.Element => {
               <h2>{title}</h2>
             </div>
             <div className='col-2 text-right'>
-              <Link to={`/edit/${id}`}>
+              <Link to={`reviews/${id}/edit`}>
                 EDIT
               </Link>
             </div>
