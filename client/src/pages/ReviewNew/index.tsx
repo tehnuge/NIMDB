@@ -2,7 +2,7 @@ import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 
 import ReviewForm from '../../forms/Review'
-import { Review, useAddReviewMutation, useAddMediaMutation } from '../../graphql'
+import { Review, useAddReviewMutation, useAddMediaMutation, ReviewsFeedDocument } from '../../graphql'
 
 interface ReviewParams {
   id: string
@@ -12,7 +12,16 @@ const ReviewEdit = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
   const {
     history
   } = props;
-  const [addReviewMutation] = useAddReviewMutation();
+  const [addReviewMutation] = useAddReviewMutation  (
+    {
+        update(cache, {data: {addReview}}){
+            const {reviews} = cache.readQuery({query: ReviewsFeedDocument});
+            cache.writeQuery({
+                query: ReviewsFeedDocument,
+                data: { reviews: reviews.concat([addReview])}
+            });
+        }    
+    });
   const [addMediaMutation] = useAddMediaMutation();
 
   const newReview: Review = {id:null, title:"", score: 5, content: ""};
@@ -20,17 +29,18 @@ const ReviewEdit = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
   const onSubmit = async (formData: Review): Promise<void> => {
     let mediaId;
     if (formData.media){
-      const variables = formData.media;
+
+      const variables = {
+          id:formData.media.id,
+          title: formData.media.title,
+          media_type: formData.media.media_type,
+          url: formData.media.url
+    };
       const newMedia = await addMediaMutation({ variables });
-      console.log(newMedia.data.addMedia.id)
       mediaId = newMedia.data.addMedia.id
     } else {
       mediaId = formData.media.id
     }
-
-    // index.js:1 Warning: `value` prop on `input` should not be null. Consider using an empty string to clear the component or `undefined` for uncontrolled components.
-
-    console.log(formData)
 
     const variables = {
       title: formData.title,

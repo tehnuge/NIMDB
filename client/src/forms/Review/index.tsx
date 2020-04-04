@@ -1,5 +1,5 @@
 import { Formik, Form } from 'formik';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Input, Select } from '../../components';
 import { Option } from '../../components/Select';
 import { Review } from '../../graphql';
