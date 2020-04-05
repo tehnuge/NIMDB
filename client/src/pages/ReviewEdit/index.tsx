@@ -5,18 +5,20 @@ import ReviewForm from '../../forms/Review'
 import { useReviewQuery, Review, useUpdateReviewMutation } from '../../graphql'
 
 interface ReviewParams {
-  id: string
+  reviewId: string
+  mediaId: string
 }
 
 const ReviewEdit = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
   const {
     history,
     match: {
-      params: { id },
+      params: { reviewId,
+                mediaId },
     },
   } = props;
   const [updateReviewMutation] = useUpdateReviewMutation();
-  const { data, error, loading } = useReviewQuery({ variables: { id }});
+  const { data, error, loading } = useReviewQuery({ variables: { id: reviewId }});
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>

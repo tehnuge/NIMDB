@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Link } from 'react-router-dom'
 
 export interface ReviewTileProps {
@@ -39,7 +38,7 @@ const ReviewTile = (props: ReviewTileProps): JSX.Element => {
               <h2>{title}</h2>
             </div>
             <div className='col-2 text-right'>
-              <Link to={`reviews/${id}/edit`}>
+              <Link to={`/medias/${mediaId}/reviews/${id}/edit`}>
                 EDIT
               </Link>
             </div>
