@@ -8,6 +8,13 @@ async function clear(knex) {
 async function seed(knex) {
   await clear(knex)
 
+  const userId = uuid.v4();
+  await knex('user').insert({
+    id: userId,
+    name: "matt",
+    googleId: "1"
+  })
+
   const mediaId = uuid.v4()
   await knex('media').insert({
     id: mediaId,
@@ -35,7 +42,8 @@ async function seed(knex) {
     id: uuid.v4(),
     score: 5,
     title: 'This was the bomb',
-    content: 'Chris Nolan flexin’ and as good as it gets'
+    content: 'Chris Nolan flexin’ and as good as it gets',
+    userId: userId
   })
   // await knex('review').insert({
   //   mediaId: mediaId2,

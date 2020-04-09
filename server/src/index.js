@@ -4,7 +4,6 @@ const { ApolloServer } = require('apollo-server-express')
 const { importSchema } = require('graphql-import')
 const { resolvers } = require('./graphql')
 const typeDefs = importSchema('./src/graphql/schema.graphql')
-// const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const passport = require("passport");
 
@@ -20,7 +19,7 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:4000/auth/google/redirect"
   },
   function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+    User.findOrAddUser({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });
   }
