@@ -1,0 +1,11 @@
+mutation FindOrAddUser(
+  $googleId: String!
+  $id: ID
+  $name: String
+) {
+  findOrAddUser(googleId: $googleId, id: $id, name: $name) {
+    id
+    googleId
+    name
+  }
+}

@@ -1,5 +1,6 @@
 const knex = require('../../db/knex');
-const user = (_, { id }) => 
+
+const user = (_, { id }) =>
   knex('user')
     .where({ id })
     .first();

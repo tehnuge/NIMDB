@@ -4,8 +4,7 @@ module.exports = {
   id: obj => obj.id,
   name: obj => obj.name,
   googleId: obj => obj.googleId,
-  reviews: obj => 
+  reviews: obj =>
     knex('review')
       .where({ userId: obj.id })
-      .first(),
 }

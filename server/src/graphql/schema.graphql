@@ -12,13 +12,14 @@ type Review {
   score: Int
   content: String
   media: Media
+  user: User!
 }
 
 type User {
   id: ID!
   name: String!
   googleId: String
-  review: [Review]
+  reviews: [Review]
 }
 
 type Query {
@@ -29,12 +30,14 @@ type Query {
   review(id: ID!): Review
 
   users: [User]
-  user:(id: ID!): User
+  user(id: ID!): User
 }
 
 type Mutation {
   addReview(title: String!, content: String, score: Int, mediaId: ID): Review!
   updateReview(id: ID!, title: String, content: String, score: Int): Review!
-  findOrAddUser(googleId: String!, id: ID, name: String) : User!
+
+  findOrAddUser(googleId: String!, id: ID, name: String): User!
+
   addMedia(title: String!, media_type: String!, url: String): Media!
 }

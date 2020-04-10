@@ -23,7 +23,7 @@ passport.use(new GoogleStrategy({
       return cb(err, user);
     });
   }
-)); 
+));
 
 app.get('/auth/google',
   passport.authenticate('google', {
@@ -33,7 +33,7 @@ app.get('/auth/google',
 
 app.use('/', express.static('public'));
 
-app.get('/auth/google/redirect', 
+app.get('/auth/google/redirect',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
