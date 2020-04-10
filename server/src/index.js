@@ -6,6 +6,9 @@ const { resolvers } = require('./graphql')
 const typeDefs = importSchema('./src/graphql/schema.graphql')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const passport = require("passport");
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
+
 const { findOrAddUser } = require('./graphql/Mutation')
 
 const server = new ApolloServer({ typeDefs, resolvers })
@@ -14,6 +17,11 @@ server.applyMiddleware({ app })
 // initalize passport
 app.use(passport.initialize());
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ['123']
+}));
+
 passport.serializeUser((user, done) => {
   done(null, user);
 });
@@ -21,6 +29,8 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((user, done) => {
   done(null, user);
 });
+
+app.use(cookieParser());
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -53,11 +63,21 @@ app.use('/', express.static('public'));
 
 app.get('/auth/google/redirect',
   passport.authenticate('google', { successRedirect: 'http://localhost:3000/', failureRedirect: '/login' }),
-  function(_, res) {
-    console.log('REDIRECTING....')
+  function(req, res) {
+    req.session.token = req.user.token
+    res.cookie('token', req.session.token);
     res.redirect('/')
   }
 );
 
+app.get('/loggedin', (req, res)=> {
+  res.send(req)
+  if(req.user){
+    res.send('logged in');
+  }
+  else{
+    res.send('not logged in');
+  }
+})
 const port = process.env.SERVER_PORT || 4000
 app.listen(port, () => console.log(`App listening on port ${port}!`))

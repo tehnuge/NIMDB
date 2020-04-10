@@ -18,9 +18,9 @@ const Home = (): JSX.Element => {
         <h1>Latest NIMDB Reviews</h1>
         <ul>
           <li>
-            <Link to={'/auth/google'}>
+            <a href='http://localhost:4000/auth/google/'>
               Sign In with Google
-            </Link>
+            </a>
           </li>
           <li>
             <Link to={`reviews/new`}>
