@@ -10,6 +10,7 @@ Create a postgres docker image by running the following command in terminal:
 
 ```
 docker run -d --name nimdb_postgres -e "POSTGRES_PASSWORD=password" -e "POSTGRES_USER=nimdb" -e "POSTGRES_DB=nimdb" -p 54320:5432 postgres
+(after docker restart) docker container start nimdb_postgres
 ```
 
 Run migrations and seed database with knex:
