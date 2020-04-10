@@ -47,7 +47,11 @@ passport.use(new GoogleStrategy({
       .then((user) => {
         console.log('write cookies..?')
 
-        return done(null, user);
+        // return done(null, user);
+        return done(null, {
+          profile,
+          token: accessToken
+        })
       })
   }
 ));
@@ -71,8 +75,9 @@ app.get('/auth/google/redirect',
 );
 
 app.get('/loggedin', (req, res)=> {
-  res.send(req)
-  if(req.user){
+  console.log('passport', req.session.passport)
+  console.log('passport', req.session.token)
+  if(req.session.token){
     res.send('logged in');
   }
   else{
