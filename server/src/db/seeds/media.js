@@ -3,6 +3,7 @@ const uuid = require('uuid')
 async function clear(knex) {
   await knex('review').del();
   await knex('media').del();
+  await knex('user').del();
 }
 
 async function seed(knex) {
