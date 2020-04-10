@@ -14,20 +14,31 @@ server.applyMiddleware({ app })
 // initalize passport
 app.use(passport.initialize());
 
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://localhost:4000/auth/google/redirect"
   },
-  function(accessToken, refreshToken, profile, cb) {
-    console.log('i see changes')
+  function(accessToken, refreshToken, profile, done) {
+    // for photoUrl: profile.photos[0].value
+    console.log('accessToken', accessToken)
+    console.log('refreshToken', refreshToken)
+    console.log('done', done)
 
-    for (let key in profile) {
-      console.log(key, profile[key])
-    }
-    findOrAddUser(null, { googleId: profile.id, name: profile.name.givenName }, function (err, user) {
-      return cb(err, user);
-    });
+    return findOrAddUser(null, { googleId: profile.id, name: profile.name.givenName })
+      .then((user) => {
+        console.log('write cookies..?')
+
+        return done(null, user);
+      })
   }
 ));
 
@@ -39,10 +50,12 @@ app.get('/auth/google',
 
 app.use('/', express.static('public'));
 
+
 app.get('/auth/google/redirect',
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
+  passport.authenticate('google', { successRedirect: 'http://localhost:3000/', failureRedirect: '/login' }),
+  function(_, res) {
+    console.log('REDIRECTING....')
+    res.redirect('/')
   }
 );
 
