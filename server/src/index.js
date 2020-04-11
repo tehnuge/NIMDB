@@ -8,6 +8,8 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const passport = require("passport");
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
+const SERVER_URL = "http://localhost:4000";
+const WEB_URL = "http://localhost:3000/";
 
 const { findOrAddUser } = require('./graphql/Mutation')
 
@@ -19,7 +21,7 @@ app.use(passport.initialize());
 
 app.use(cookieSession({
   name: 'session',
-  keys: ['123']
+  keys: [process.env.COOKIE_KEY]
 }));
 
 passport.serializeUser((user, done) => {
@@ -35,19 +37,13 @@ app.use(cookieParser());
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:4000/auth/google/redirect"
+    callbackURL: `${SERVER_URL}/auth/google/redirect`
   },
   function(accessToken, refreshToken, profile, done) {
     // for photoUrl: profile.photos[0].value
-    console.log('accessToken', accessToken)
-    console.log('refreshToken', refreshToken)
-    console.log('done', done)
 
     return findOrAddUser(null, { googleId: profile.id, name: profile.name.givenName })
       .then((user) => {
-        console.log('write cookies..?')
-
-        // return done(null, user);
         return done(null, {
           profile,
           token: accessToken
@@ -62,27 +58,24 @@ app.get('/auth/google',
   })
 );
 
-app.use('/', express.static('public'));
-
+app.use('/', express.static('public')); 
 
 app.get('/auth/google/redirect',
-  passport.authenticate('google', { successRedirect: 'http://localhost:3000/', failureRedirect: '/login' }),
+  passport.authenticate('google', { successRedirect: WEB_URL, failureRedirect: '/login' }),
   function(req, res) {
-    req.session.token = req.user.token
-    res.cookie('token', req.session.token);
     res.redirect('/')
   }
 );
 
 app.get('/loggedin', (req, res)=> {
   console.log('passport', req.session.passport)
-  console.log('passport', req.session.token)
-  if(req.session.token){
+  if(req.session.passport.user.token){
     res.send('logged in');
   }
   else{
     res.send('not logged in');
   }
-})
-const port = process.env.SERVER_PORT || 4000
+});
+
+const port = process.env.SERVER_PORT || 4000;
 app.listen(port, () => console.log(`App listening on port ${port}!`))
