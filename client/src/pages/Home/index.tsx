@@ -16,9 +16,18 @@ const Home = (): JSX.Element => {
     <Fragment>
       <div className="container">
         <h1>Latest NIMDB Reviews</h1>
-        <Link to={`reviews/new`}>
-          Add Review
-        </Link>
+        <ul>
+          <li>
+            <a href='http://localhost:4000/auth/google/'>
+              Sign In with Google
+            </a>
+          </li>
+          <li>
+            <Link to={`reviews/new`}>
+              Add Review
+            </Link>
+          </li>
+        </ul>
         {reviews.map((review) => (
           <ReviewTile
             key={review.id}

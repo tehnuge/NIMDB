@@ -9,4 +9,8 @@ module.exports = {
     knex('media')
       .where({ id: obj.mediaId })
       .first(),
+  user: obj =>
+    knex('user')
+      .where({id: obj.userId})
+      .first(),
 }

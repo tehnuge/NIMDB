@@ -20,11 +20,11 @@ const ReviewEdit = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
                 query: ReviewsFeedDocument,
                 data: { reviews: reviews.concat([addReview])}
             });
-        }    
+        }
     });
   const [addMediaMutation] = useAddMediaMutation();
 
-  const newReview: Review = {id:null, title:"", score: 5, content: ""};
+  const newReview: Review = {id: null, title: "", score: 5, content: "", user: null};
 
   const onSubmit = async (formData: Review): Promise<void> => {
     let mediaId;
