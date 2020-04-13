@@ -1,9 +1,10 @@
 mutation AddReview(
   $title: String!
   $content: String
-  $mediaId: ID
+  $mediaId: ID!
+  $userId: ID!
 ) {
-  addReview(title: $title, content: $content, mediaId: $mediaId) {
+  addReview(title: $title, content: $content, mediaId: $mediaId, userId: $userId) {
     id
     score
     title
@@ -11,6 +12,11 @@ mutation AddReview(
     media {
       id
       title
+    }
+    user {
+      id
+      googleId
+      name
     }
   }
 }

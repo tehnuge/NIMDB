@@ -8,34 +8,34 @@ interface ReviewParams {
   id: string
 }
 
-const ReviewEdit = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
+const ReviewNew = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
   const {
     history
   } = props;
-  const [addReviewMutation] = useAddReviewMutation  (
+  const [addReviewMutation] = useAddReviewMutation(
     {
-        update(cache, {data: {addReview}}){
-            const {reviews} = cache.readQuery({query: ReviewsFeedDocument});
-            cache.writeQuery({
-                query: ReviewsFeedDocument,
-                data: { reviews: reviews.concat([addReview])}
-            });
-        }
+      update(cache, { data: { addReview } }) {
+        const { reviews } = cache.readQuery({ query: ReviewsFeedDocument });
+        cache.writeQuery({
+          query: ReviewsFeedDocument,
+          data: { reviews: reviews.concat([addReview]) }
+        });
+      }
     });
   const [addMediaMutation] = useAddMediaMutation();
 
-  const newReview: Review = {id: null, title: "", score: 5, content: "", user: null};
+  const newReview: Review = { id: null, title: "", score: 5, content: "", user: null };
 
   const onSubmit = async (formData: Review): Promise<void> => {
     let mediaId;
-    if (formData.media){
+    if (formData.media) {
 
       const variables = {
-          id:formData.media.id,
-          title: formData.media.title,
-          media_type: formData.media.media_type,
-          url: formData.media.url
-    };
+        id: formData.media.id,
+        title: formData.media.title,
+        media_type: formData.media.media_type,
+        url: formData.media.url
+      };
       const newMedia = await addMediaMutation({ variables });
       mediaId = newMedia.data.addMedia.id
     } else {
@@ -46,7 +46,8 @@ const ReviewEdit = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
       title: formData.title,
       content: formData.content,
       score: formData.score,
-      mediaId: mediaId
+      mediaId: mediaId,
+      userId: formData.user.id
     }
 
     await addReviewMutation({ variables })
@@ -69,4 +70,4 @@ const ReviewEdit = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
   )
 }
 
-export default ReviewEdit
+export default ReviewNew;

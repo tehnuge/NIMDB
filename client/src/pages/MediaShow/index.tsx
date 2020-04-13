@@ -10,7 +10,6 @@ interface MediaShowParams {
 
 const MediaShow = (props: RouteComponentProps<MediaShowParams>): JSX.Element => {
   const {
-    history,
     match: {
       params: { id },
     },

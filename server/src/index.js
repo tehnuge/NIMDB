@@ -6,7 +6,6 @@ const { resolvers } = require('./graphql')
 const typeDefs = importSchema('./src/graphql/schema.graphql')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const passport = require("passport");
-const SERVER_URL = "http://localhost:4000";
 const WEB_URL = "http://localhost:3000/";
 const session = require("express-session");
 const bodyParser = require("body-parser");
@@ -33,7 +32,7 @@ passport.deserializeUser((user, done) => {
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `${SERVER_URL}/auth/google/redirect`
+    callbackURL: `/auth/google/redirect`
   },
   function(accessToken, refreshToken, profile, done) {
     // for photoUrl: profile.photos[0].value
@@ -47,6 +46,11 @@ passport.use(new GoogleStrategy({
       })
   }
 ));
+app.get('/auth/google',
+  passport.authenticate('google', {
+    scope: ['profile']
+  })
+);
 
 app.use('/', express.static('public'));
 

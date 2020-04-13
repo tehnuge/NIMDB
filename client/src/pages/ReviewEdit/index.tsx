@@ -13,8 +13,7 @@ const ReviewEdit = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
   const {
     history,
     match: {
-      params: { reviewId,
-                mediaId },
+      params: { reviewId },
     },
   } = props;
   const [updateReviewMutation] = useUpdateReviewMutation();
@@ -30,7 +29,8 @@ const ReviewEdit = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
       id: formData.id,
       title: formData.title,
       content: formData.content,
-      score: formData.score
+      score: formData.score,
+      user: formData.user
     }
 
     await updateReviewMutation({ variables })

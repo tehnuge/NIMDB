@@ -18,7 +18,7 @@ const Home = (): JSX.Element => {
         <h1>Latest NIMDB Reviews</h1>
         <ul>
           <li>
-            <a href='http://localhost:4000/auth/google/'>
+            <a href={`${process.env.REACT_APP_SERVER_URL}/auth/google/`}>
               Sign In with Google
             </a>
           </li>

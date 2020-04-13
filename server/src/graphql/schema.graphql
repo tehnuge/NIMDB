@@ -34,7 +34,7 @@ type Query {
 }
 
 type Mutation {
-  addReview(title: String!, content: String, score: Int, mediaId: ID): Review!
+  addReview(title: String!, content: String, score: Int, mediaId: ID, userId: ID): Review!
   updateReview(id: ID!, title: String, content: String, score: Int): Review!
 
   findOrAddUser(googleId: String!, id: ID, name: String): User!
