@@ -74,12 +74,19 @@ app.get('/auth/google/redirect',
 );
 
 app.get('/user', (req, res) => {
-  console.log('session', req.session)
   if (req.session.passport) {
-    res.send({
-      googleId: req.session.passport.user.profile.id
-    }
-    );
+    findOrAddUser(null, { googleId: req.session.passport.user.profile.id })
+      .then((user) => {
+        res.send({
+          googleId: req.session.passport.user.profile.id,
+          name: user.name,
+          id: user.id
+        });
+        // return done(null, {
+        //   profile,
+        //   token: accessToken
+        // });
+      })
   }
   else {
     res.send('not logged in');

@@ -17,8 +17,6 @@ const ReviewNew = (props: ReviewNewProps): JSX.Element => {
     history
   } = props.routeProps;
 
-  const user = props.user;
-
   const [addReviewMutation] = useAddReviewMutation(
     {
       update(cache, { data: { addReview } }) {
