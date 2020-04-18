@@ -13,7 +13,7 @@ async function seed(knex) {
   await knex('user').insert({
     id: userId,
     name: "matt",
-    googleId: "1"
+    googleId: "3241234312GOOGID"
   })
 
   const mediaId = uuid.v4()
@@ -28,7 +28,8 @@ async function seed(knex) {
     id: uuid.v4(),
     score: 3,
     title: 'This won how many awards..?',
-    content: 'I like the scene with the boobies. And the other scene with the boobies. I’m a man now.'
+    content: 'I like the scene with the boobies. And the other scene with the boobies. I’m a man now.',
+    userId: userId
   })
 
   const mediaId2 = uuid.v4()

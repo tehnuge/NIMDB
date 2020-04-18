@@ -29,7 +29,7 @@ const ReviewNew = (props: ReviewNewProps): JSX.Element => {
     });
   const [addMediaMutation] = useAddMediaMutation();
 
-  const newReview: Review = { id: null, title: "", score: 5, content: "", user: null };
+  const newReview: Review = { id: null, title: "", score: 5, content: "", user: props.user };
 
   const onSubmit = async (formData: Review): Promise<void> => {
     let mediaId;
@@ -52,7 +52,7 @@ const ReviewNew = (props: ReviewNewProps): JSX.Element => {
       content: formData.content,
       score: formData.score,
       mediaId: mediaId,
-      userId: formData.user.id
+      userId: props.user.id
     }
 
     await addReviewMutation({ variables })
