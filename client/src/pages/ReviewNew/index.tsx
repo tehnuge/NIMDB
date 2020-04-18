@@ -1,17 +1,24 @@
 import React from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps, RouteProps } from 'react-router-dom'
 
 import ReviewForm from '../../forms/Review'
-import { Review, useAddReviewMutation, useAddMediaMutation, ReviewsFeedDocument } from '../../graphql'
+import { Review, useAddReviewMutation, useAddMediaMutation, ReviewsFeedDocument, User } from '../../graphql'
 
 interface ReviewParams {
   id: string
 }
+interface ReviewNewProps {
+  user: User,
+  routeProps: RouteComponentProps
+}
 
-const ReviewNew = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
+const ReviewNew = (props: ReviewNewProps): JSX.Element => {
   const {
     history
-  } = props;
+  } = props.routeProps;
+
+  const user = props.user;
+
   const [addReviewMutation] = useAddReviewMutation(
     {
       update(cache, { data: { addReview } }) {
