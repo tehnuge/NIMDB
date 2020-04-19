@@ -1,14 +1,17 @@
 query MediaList {
-    medias {
+  medias {
+    id
+    title
+    media_type
+    reviews {
+      id
+      title
+      content
+      user {
         id
-        title
-        media_type
-        reviews {
-            id
-            title
-            content
-        }        
-
+        googleId
+        name
+      }
     }
-
+  }
 }

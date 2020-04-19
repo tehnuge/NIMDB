@@ -1,18 +1,10 @@
 import React from 'react'
-import { RouteComponentProps, RouteProps } from 'react-router-dom'
+import { UserProps } from '../../interfaces/UserProps';
 
 import ReviewForm from '../../forms/Review'
-import { Review, useAddReviewMutation, useAddMediaMutation, ReviewsFeedDocument, User } from '../../graphql'
+import { Review, useAddReviewMutation, useAddMediaMutation, ReviewsFeedDocument } from '../../graphql'
 
-interface ReviewParams {
-  id: string
-}
-interface ReviewNewProps {
-  user: User,
-  routeProps: RouteComponentProps
-}
-
-const ReviewNew = (props: ReviewNewProps): JSX.Element => {
+const ReviewNew = (props: UserProps<any>): JSX.Element => {
   const {
     history
   } = props.routeProps;
@@ -55,12 +47,12 @@ const ReviewNew = (props: ReviewNewProps): JSX.Element => {
       userId: props.user.id
     }
 
-    await addReviewMutation({ variables })
-    history.push('/')
+    await addReviewMutation({ variables });
+    history.push('/');
   }
 
   const onCancel = () => {
-    history.push('/')
+    history.push('/');
   }
 
   return (

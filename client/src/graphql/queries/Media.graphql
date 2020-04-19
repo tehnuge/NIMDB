@@ -1,14 +1,19 @@
-query Media($id: ID!){
-    media(id: $id){
+query Media($id: ID!) {
+  media(id: $id) {
+    id
+    title
+    media_type
+    url
+    reviews {
       id
       title
-      media_type
-      url
-      reviews {
+      content
+      score
+      user {
         id
-        title
-        content
-        score
+        googleId
+        name
       }
     }
+  }
 }

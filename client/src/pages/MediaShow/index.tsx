@@ -1,20 +1,21 @@
-import React from 'react'
-import { RouteComponentProps, Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { useMediaQuery } from '../../graphql'
+import { useMediaQuery } from '../../graphql';
 import ReviewTile from '../../components/ReviewTile';
+import { UserProps } from '../../interfaces/UserProps';
 
 interface MediaShowParams {
   id: string
 }
 
-const MediaShow = (props: RouteComponentProps<MediaShowParams>): JSX.Element => {
+const MediaShow = (props: UserProps<MediaShowParams>): JSX.Element => {
   const {
     match: {
       params: { id },
     },
-  } = props;
-  const { data, error, loading } = useMediaQuery({ variables: { id }});
+  } = props.routeProps;
+  const { data, error, loading } = useMediaQuery({ variables: { id } });
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
@@ -51,11 +52,8 @@ const MediaShow = (props: RouteComponentProps<MediaShowParams>): JSX.Element => 
             {media.reviews.map((review) => (
               <ReviewTile
                 key={review.id}
-                id={review.id}
-                title={review.title}
-                content={review.content}
-                mediaTitle={media.title}
-                mediaId={media.id}
+                review={review}
+                user={props.user}
               />
             ))}
           </div>

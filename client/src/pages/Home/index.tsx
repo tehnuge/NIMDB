@@ -2,15 +2,16 @@ import React, { Fragment } from 'react';
 import {Link} from 'react-router-dom';
 import ReviewTile from '../../components/ReviewTile';
 import { useReviewsFeedQuery } from '../../graphql';
+import { UserProps } from '../../interfaces/UserProps';
 
-const Home = (): JSX.Element => {
+const Home = (props: UserProps<any>): JSX.Element => {
   const { data, error, loading } = useReviewsFeedQuery()
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
   if (!data || !data.reviews) return <p>No data</p>
 
-  const { reviews } = data
+  const { reviews } = data;
 
   return (
     <Fragment>
@@ -22,20 +23,16 @@ const Home = (): JSX.Element => {
               Sign In with Google
             </a>
           </li>
-          <li>
-            <Link to={`reviews/new`}>
+          <li className={props.user.googleId ? "": "d-none"}>
+            <Link to={`reviews/new`} >
               Add Review
             </Link>
           </li>
         </ul>
         {reviews.map((review) => (
           <ReviewTile
-            key={review.id}
-            id={review.id}
-            title={review.title}
-            content={review.content}
-            mediaTitle={review.media.title}
-            mediaId={review.media.id}
+            review={review}
+            user={props.user}
           />
         ))}
       </div>

@@ -7,6 +7,12 @@ query ReviewsFeed {
     media {
       id
       title
+      media_type
+    }
+    user {
+      id
+      googleId
+      name
     }
   }
 }

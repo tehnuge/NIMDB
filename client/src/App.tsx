@@ -22,12 +22,14 @@ const App = () => {
 
   return (
     <Switch>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" render={props =>
+        <Home user={user} routeProps={props} />} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/reviews/new" render={props =>
         <ReviewNew user={user} routeProps={props} />} />
       <Route exact path="/medias/:mediaId/reviews/:reviewId/edit" component={ReviewEdit} />
-      <Route exact path="/medias/:id" component={MediaShow} />
+      <Route exact path="/medias/:id" render={props =>
+        <MediaShow user={user} routeProps={props} /> }/>
     </Switch>
   )
 }
