@@ -4,6 +4,17 @@ import { UserProps } from '../../interfaces/UserProps';
 import ReviewForm from '../../forms/Review'
 import { Review, useAddReviewMutation, useAddMediaMutation, ReviewsFeedDocument } from '../../graphql'
 
+const omdbUrl = `http://omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&t=`;
+const fetchPoster = (title: string): Promise<string> => {
+  let poster = fetch(omdbUrl + title)
+    .then(response =>
+      response.json())
+    .then(responseData => {
+      return responseData["Poster"]
+    });
+  return poster;
+}
+
 const ReviewNew = (props: UserProps<any>): JSX.Element => {
   const {
     history
@@ -25,30 +36,34 @@ const ReviewNew = (props: UserProps<any>): JSX.Element => {
 
   const onSubmit = async (formData: Review): Promise<void> => {
     let mediaId;
-    if (formData.media) {
+    let title = formData.media.title;
+    let poster = fetchPoster(title);
 
-      const variables = {
-        id: formData.media.id,
-        title: formData.media.title,
-        media_type: formData.media.media_type,
-        url: formData.media.url
-      };
-      const newMedia = await addMediaMutation({ variables });
-      mediaId = newMedia.data.addMedia.id
-    } else {
-      mediaId = formData.media.id
-    }
+    let variables = {
+      id: formData.media.id,
+      title,
+      media_type: formData.media.media_type,
+      url: ''
+    };
+    poster.then(posterUrl => {
+      variables['url'] = posterUrl;
+      return addMediaMutation({ variables });
+    })
+      .then(dbMediaId => {
+        mediaId = dbMediaId.data.addMedia.id;
+        const reviewVariables = {
+          title: formData.title,
+          content: formData.content,
+          score: formData.score,
+          mediaId: mediaId,
+          userId: props.user.id
+        }
 
-    const variables = {
-      title: formData.title,
-      content: formData.content,
-      score: formData.score,
-      mediaId: mediaId,
-      userId: props.user.id
-    }
-
-    await addReviewMutation({ variables });
-    history.push('/');
+        return addReviewMutation({ variables: reviewVariables });
+      })
+      .then(res => {
+        history.push('/');
+      });
   }
 
   const onCancel = () => {
