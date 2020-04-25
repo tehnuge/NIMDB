@@ -12,6 +12,11 @@ query MediaList {
         googleId
         name
       }
+      media {
+        id
+        title
+        media_type
+      }
     }
   }
 }

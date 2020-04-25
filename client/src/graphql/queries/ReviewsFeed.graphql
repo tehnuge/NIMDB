@@ -8,6 +8,7 @@ query ReviewsFeed {
       id
       title
       media_type
+      url
     }
     user {
       id

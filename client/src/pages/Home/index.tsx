@@ -31,6 +31,7 @@ const Home = (props: UserProps<any>): JSX.Element => {
         </ul>
         {reviews.map((review) => (
           <ReviewTile
+            key={review.id}
             review={review}
             user={props.user}
           />

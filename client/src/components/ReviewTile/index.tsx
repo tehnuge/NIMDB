@@ -18,7 +18,7 @@ const ReviewTile = (props: ReviewTileProps): JSX.Element => {
             <img
               alt='Content poster or logo'
               className='img-fluid'
-              src='https://upload.wikimedia.org/wikipedia/en/8/83/Dark_knight_rises_poster.jpg'
+              src={media.url}
             />
           </Link>
           <span>{media.title}</span>

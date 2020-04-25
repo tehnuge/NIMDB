@@ -21,7 +21,7 @@ async function seed(knex) {
     id: mediaId,
     title: 'Titanic',
     media_type: 'movie',
-    url: 'www.example.com'
+    url: 'https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg'
   })
   await knex('review').insert({
     mediaId: mediaId,
@@ -37,7 +37,7 @@ async function seed(knex) {
     id: mediaId2,
     title: 'Inception',
     media_type: 'movie',
-    url: 'www.example2.com'
+    url: 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg'
   });
   await knex('review').insert({
     mediaId: mediaId2,
