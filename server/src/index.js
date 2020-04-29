@@ -16,9 +16,13 @@ const server = new ApolloServer({ typeDefs, resolvers });
 const app = express();
 server.applyMiddleware({ app });
 // initalize passport
-app.use(session({ secret: process.env.COOKIE_KEY,
-name: 'serverapp',
-saveUninitialized: false }));
+app.use(
+  session({
+    secret: process.env.COOKIE_KEY,
+    name: 'serverapp',
+    saveUninitialized: false
+  })
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
