@@ -20,14 +20,14 @@ const Home = (props: UserProps<any>): JSX.Element => {
         <ul>
           {!props.user.id && <li>
             <a href={`${process.env.REACT_APP_SERVER_URL}/auth/google/`}>
-              Sign In with Google
+              Sign in with Google
             </a>
           </li>}
-          <li className={props.user.googleId ? "": "d-none"}>
+          {props.user.id && <li>
             <Link to={`reviews/new`} >
               Add Review
             </Link>
-          </li>
+          </li>}
         </ul>
         {reviews.map((review) => (
           <ReviewTile

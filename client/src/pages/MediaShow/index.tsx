@@ -26,7 +26,7 @@ const MediaShow = (props: UserProps<MediaShowParams>): JSX.Element => {
       <div className='container'>
         <div className='row'>
           <div className='col'>
-            <Link to='/'>
+            <Link to='/' className='back-btn'>
               Back
             </Link>
           </div>
