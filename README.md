@@ -10,7 +10,7 @@ Create a postgres docker image by running the following command in terminal:
 
 ```
 docker run -d --name nimdb_postgres -e "POSTGRES_PASSWORD=password" -e "POSTGRES_USER=nimdb" -e "POSTGRES_DB=nimdb" -p 54320:5432 postgres
-(after docker restart) docker container start nimdb_postgres
+docker container start nimdb_postgres (after docker restart)
 ```
 
 Run migrations and seed database with knex:
@@ -37,3 +37,9 @@ Start a dev server in the root directory
 2. Save the query in `client/src/graphql/[queries|mutations]/exampleOperation.graphql`
 3. Run the gql-gen code generator (automatic while watching with `yarn dev`)
 4. Import from `../../graphql` the methods made available via the codegen, e.g. `useExampleOperationQuery`|Mutation
+
+## Testing
+
+NIMDB uses Cypress for end-to-end testing. Start up Cypress running the following command:
+
+`yarn run cypress open`

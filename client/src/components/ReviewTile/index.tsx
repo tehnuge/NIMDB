@@ -13,15 +13,15 @@ const ReviewTile = (props: ReviewTileProps): JSX.Element => {
   return (
     <div className='review-tile container border bg-light py-3 mb-3'>
       <div className='row'>
-        <div className='col-1 img-fluid text-center'>
+        <div className='media-link col-1 img-fluid text-center'>
           <Link to={`medias/${media.id}`}>
             <img
               alt='Content poster or logo'
               className='img-fluid'
-              src='https://upload.wikimedia.org/wikipedia/en/8/83/Dark_knight_rises_poster.jpg'
+              src={media.url}
             />
+            <span>{media.title}</span>
           </Link>
-          <span>{media.title}</span>
         </div>
         <div className='col-11'>
           <div className='header row d-flex align-items-center mb-3'>

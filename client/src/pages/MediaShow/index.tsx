@@ -21,13 +21,12 @@ const MediaShow = (props: UserProps<MediaShowParams>): JSX.Element => {
   if (error) return <p>Error: {error.message}</p>
 
   const { media } = data
-
   return (
     <div>
       <div className='container'>
         <div className='row'>
           <div className='col'>
-            <Link to='/'>
+            <Link to='/' className='back-btn'>
               Back
             </Link>
           </div>
@@ -37,7 +36,7 @@ const MediaShow = (props: UserProps<MediaShowParams>): JSX.Element => {
             <img
               alt='Content poster or logo'
               className='img-fluid'
-              src='https://upload.wikimedia.org/wikipedia/en/8/83/Dark_knight_rises_poster.jpg'
+              src={media.url}
             />
           </div>
           <div className='col-9'>

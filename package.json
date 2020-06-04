@@ -25,5 +25,8 @@
     "dev": "concurrently \"yarn server\" \"yarn client\" \"yarn codegen:watch\"",
     "reseed": "cd server && yarn knex seed:run",
     "server": "yarn --cwd server dev"
+  },
+  "devDependencies": {
+    "cypress": "^4.5.0"
   }
 }
