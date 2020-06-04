@@ -17,7 +17,7 @@ const ReviewEdit = (props: RouteComponentProps<ReviewParams>): JSX.Element => {
     },
   } = props;
   const [updateReviewMutation] = useUpdateReviewMutation();
-  const { data, error, loading } = useReviewQuery({ variables: { id: reviewId }});
+  const { data, error, loading } = useReviewQuery({ variables: { id: reviewId } });
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>

@@ -16,7 +16,6 @@ const App = () => {
       .then(res => (res.json()))
       .then(res => {
         setUser(res);
-        console.log('user', res);
       })
   }, []);
 

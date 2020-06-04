@@ -31,7 +31,6 @@ const ReviewForm = (props: ReviewFormProps): JSX.Element => {
       return (
         <div className='bg-light p-3 mb-3'>
           <Input type="text" name="media[title]" label="Title" />
-          <Input type="text" name="media[url]" label="url" />
           <Select
             name="media[media_type]"
             label="Media Type"
@@ -44,7 +43,6 @@ const ReviewForm = (props: ReviewFormProps): JSX.Element => {
         <div className='bg-light p-3 mb-3'>
           <p>{`Title: ${media.title}`}</p>
           <p>{`Media Type: ${media.media_type}`}</p>
-          <p>{`Link: ${media.url}`}</p>
         </div>
       )
     }
