@@ -25,7 +25,8 @@
     "dev": "concurrently \"yarn server\" \"yarn client\" \"yarn codegen:watch\"",
     "reseed": "cd server && yarn knex seed:run",
     "server": "yarn --cwd server dev",
-    "start": "concurrently \"yarn server\" \"yarn client\""
+     "start": "yarn --cwd server start",
+     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "devDependencies": {
     "cypress": "^4.5.0"
