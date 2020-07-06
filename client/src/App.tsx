@@ -10,7 +10,7 @@ const App = () => {
   const [user, setUser] = useState({ id: '', name: '', googleId: '' });
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/user`, {
+    fetch(`/user`, {
       credentials: 'include',
     })
       .then(res => {
@@ -35,4 +35,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;
