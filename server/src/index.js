@@ -103,8 +103,6 @@ app.get('/user', (req, res) => {
     res.send('not logged in');
   }
 });
-app.use((req, res, next) => {
-  res.status(404);
 
 if (process.env.NODE_ENV === 'production') {	
   // Serve any static files	
