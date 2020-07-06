@@ -9,6 +9,8 @@ const passport = require("passport");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path');
+
 
 const { findOrAddUser } = require('./graphql/Mutation');
 
@@ -108,11 +110,12 @@ app.use((req, res, next) => {
 });
 
 if (process.env.NODE_ENV === 'production') {	
+  console.log("PRODODOFODOFDOFOFODFO")
   // Serve any static files	
-  app.use(express.static(path.join(__dirname, 'client/build')));	
+  app.use(express.static(path.join(__dirname, '../../client/build')));	
   // Handle React routing, return all requests to React app	
   app.get('*', function(req, res) {	
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));	
+    res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));	
   });	
 }
 
