@@ -1,4 +1,4 @@
 node_modules
-client/src/graphql/index.tsx
+# client/src/graphql/index.tsx
 server/.env
 client/.env
