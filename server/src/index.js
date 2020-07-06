@@ -24,6 +24,7 @@ app.use(
     secret: process.env.COOKIE_KEY,
     name: 'serverapp',
     saveUninitialized: false,
+    resave: false,
   })
 );
 app.use(bodyParser.urlencoded({ extended: false }));
