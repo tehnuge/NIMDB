@@ -18,9 +18,10 @@ server.applyMiddleware({ app });
 // initalize passport
 app.use(
   session({
+    store: new (require('connect-pg-simple')(session))(),
     secret: process.env.COOKIE_KEY,
     name: 'serverapp',
-    saveUninitialized: false
+    saveUninitialized: false,
   })
 );
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,7 +44,7 @@ passport.use(new GoogleStrategy({
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: `/auth/google/redirect`
 },
-  function (accessToken, refreshToken, profile, done) {
+  (accessToken, refreshToken, profile, done) => {
     // for photoUrl: profile.photos[0].value
 
     return findOrAddUser(null, { googleId: profile.id, name: profile.name.givenName })
@@ -72,7 +73,7 @@ app.get('/auth/google',
 
 app.get('/auth/google/redirect',
   passport.authenticate('google', { successRedirect: process.env.WEB_URL, failureRedirect: '/login' }),
-  function (req, res) {
+  (req, res) => {
     res.redirect('/');
   }
 );
@@ -96,6 +97,24 @@ app.get('/user', (req, res) => {
     res.send('not logged in');
   }
 });
+app.use((req, res, next) => {
+  res.status(404);
+
+  // respond with html page
+  if (req.accepts('html')) {
+    res.render('/');
+    return;
+  }
+});
+
+if (process.env.NODE_ENV === 'production') {	
+  // Serve any static files	
+  app.use(express.static(path.join(__dirname, 'client/build')));	
+  // Handle React routing, return all requests to React app	
+  app.get('*', function(req, res) {	
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));	
+  });	
+}
 
 const port = process.env.SERVER_PORT || 4000;
 app.listen(port, () => console.log(`App listening on port ${port}!`));
