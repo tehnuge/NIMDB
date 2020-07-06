@@ -106,13 +106,6 @@ app.get('/user', (req, res) => {
 app.use((req, res, next) => {
   res.status(404);
 
-  // respond with html page
-  if (req.accepts('html')) {
-    res.render('/');
-    return;
-  }
-});
-
 if (process.env.NODE_ENV === 'production') {	
   // Serve any static files	
   app.use(express.static(path.join(__dirname, '../../client/build')));	
