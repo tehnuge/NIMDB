@@ -20,11 +20,14 @@ server.applyMiddleware({ app });
 // initalize passport
 app.use(
   session({
-    store: new (require('connect-pg-simple')(session))(),
+    store: new (require('connect-pg-simple')(session))({
+      conString: process.env.DATABASE_URL
+    }),
     secret: process.env.COOKIE_KEY,
     name: 'serverapp',
     saveUninitialized: false,
     resave: false,
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
   })
 );
 app.use(bodyParser.urlencoded({ extended: false }));
