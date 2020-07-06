@@ -114,7 +114,6 @@ app.use((req, res, next) => {
 });
 
 if (process.env.NODE_ENV === 'production') {	
-  console.log("PRODODOFODOFDOFOFODFO")
   // Serve any static files	
   app.use(express.static(path.join(__dirname, '../../client/build')));	
   // Handle React routing, return all requests to React app	
@@ -123,5 +122,5 @@ if (process.env.NODE_ENV === 'production') {
   });	
 }
 
-const port = process.env.SERVER_PORT || 4000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`App listening on port ${port}!`));
