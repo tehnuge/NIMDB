@@ -10,7 +10,13 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require('path');
-
+const requireHTTPS = (req, res, next) => {
+  // The 'x-forwarded-proto' check is for Heroku
+  if (!req.secure && req.get('x-forwarded-proto') !== 'https' && process.env.NODE_ENV === "production") {
+    return res.redirect('https://' + req.get('host') + req.url);
+  }
+  next();
+}
 
 const { findOrAddUser } = require('./graphql/Mutation');
 
@@ -33,6 +39,8 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(requireHTTPS);
 
 app.use('/', express.static('public'));
 
@@ -114,4 +122,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const port = process.env.PORT || 4000;
-app.listen(port, () => console.log(`App listening on port ${port}!`));
+app.listen(port, () => console.log(`App listening on port ${port}! env: ${process.env.NODE_ENV}`));
