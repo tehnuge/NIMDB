@@ -6,11 +6,13 @@ import ReviewNew from './pages/ReviewNew';
 import MediaShow from './pages/MediaShow';
 import Login from './pages/Login';
 
+export let REACT_APP_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : process.env.REACT_APP_SERVER_URL;
+
 const App = () => {
   const [user, setUser] = useState({ id: '', name: '', googleId: '' });
 
   useEffect(() => {
-    fetch(`/user`, {
+    fetch(REACT_APP_SERVER_URL+`/user`, {
       credentials: 'include',
     })
       .then(res => {

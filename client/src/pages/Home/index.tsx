@@ -3,9 +3,11 @@ import {Link} from 'react-router-dom';
 import ReviewTile from '../../components/ReviewTile';
 import { useReviewsFeedQuery } from '../../graphql';
 import { UserProps } from '../../interfaces/UserProps';
+import {REACT_APP_SERVER_URL} from '../../App';
 
 const Home = (props: UserProps<any>): JSX.Element => {
   const { data, error, loading } = useReviewsFeedQuery()
+  console.log("env:",REACT_APP_SERVER_URL)
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
@@ -19,7 +21,7 @@ const Home = (props: UserProps<any>): JSX.Element => {
         <h1>Latest NIMDB Reviews</h1>
         <ul>
           {!props.user.id && <li>
-            <a href={`${process.env.REACT_APP_SERVER_URL}/auth/google/`}>
+            <a href={REACT_APP_SERVER_URL + `/auth/google/`}>
               Sign in with Google
             </a>
           </li>}
