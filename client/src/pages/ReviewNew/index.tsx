@@ -4,7 +4,7 @@ import { UserProps } from '../../interfaces/UserProps';
 import ReviewForm from '../../forms/Review'
 import { Review, useAddReviewMutation, useAddMediaMutation, ReviewsFeedDocument } from '../../graphql'
 
-const omdbUrl = `http://omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&t=`;
+const omdbUrl = `https://omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&t=`;
 const fetchPoster = (title: string): Promise<string> => {
   let poster = fetch(omdbUrl + title)
     .then(response =>
